@@ -8,6 +8,8 @@ import 'package:weather_monitoring_app/widgets/daily_summary_card.dart'
     as daily_card;
 
 class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
