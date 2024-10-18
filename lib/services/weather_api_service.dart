@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../models/weather_data.dart';
 
 class WeatherApiService {
-  final String apiKey = 'e27a2e12c5425fbb3819608485fb8982';
+  final String apiKey = '7c8454cb2ff31c2cd40a20948dde127a';
   final List<String> cities = ['Delhi', 'Mumbai', 'Chennai', 'Bangalore', 'Kolkata', 'Hyderabad'];
 
   Future<WeatherData> getWeatherData(String city) async {
