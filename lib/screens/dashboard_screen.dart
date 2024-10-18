@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_monitoring_app/providers/weather_providers.dart';
-import 'package:weather_monitoring_app/widgets/daily_summary_card.dart';
-
-
-import '../widgets/weather_chart.dart';
+import 'package:weather_monitoring_app/widgets/daily_summary_card.dart' as daily_card;
+import 'package:weather_monitoring_app/widgets/weather_chart.dart' as weather_chart;
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -24,7 +22,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather Dashboard'),
+        title: const Text('Weather Dashboard'),
       ),
       body: Consumer<WeatherProvider>(
         builder: (context, weatherProvider, child) {
@@ -34,8 +32,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return ListView(
             children: [
               for (var weather in weatherProvider.currentWeather)
-                DailySummaryCard(weatherData: weather),
-              WeatherChart(summaries: weatherProvider.dailySummaries),
+                daily_card.DailySummaryCard(weatherData: weather),
+              weather_chart.WeatherChart(summaries: weatherProvider.dailySummaries),
             ],
           );
         },

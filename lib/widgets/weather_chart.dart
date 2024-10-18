@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
-import '../models/weather_data.dart';
-import '../services/data_processing_service.dart';
+import 'package:fl_chart/fl_chart.dart';
+import '../models/daily_summary.dart';
 
-class DailySummaryCard extends StatelessWidget {
-  final WeatherData weatherData;
-  final DataProcessingService _dataService = DataProcessingService();
+class WeatherChart extends StatelessWidget {
+  final List<DailySummary> summaries;
 
-  DailySummaryCard({super.key, required this.weatherData});
+  WeatherChart({required this.summaries});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8.0),
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(weatherData.city, style: Theme.of(context).textTheme.titleLarge),
-         const   SizedBox(height: 8.0),
-            Text('Temperature: ${_dataService.kelvinToCelsius(weatherData.temperature).toStringAsFixed(1)}°C'),
-            Text('Feels Like: ${_dataService.kelvinToCelsius(weatherData.feelsLike).toStringAsFixed(1)}°C'),
-            Text('Condition: ${weatherData.condition}'),
+    return Container(
+      height: 300,
+      padding: EdgeInsets.all(16.0),
+      child: LineChart(
+        LineChartData(
+          gridData: FlGridData(show: false),
+          titlesData: FlTitlesData(show: false),
+          borderData: FlBorderData(show: true),
+          minX: 0,
+          maxX: summaries.length.toDouble() - 1,
+          minY: summaries.map((s) => s.minTemperature).reduce((a, b) => a < b ? a : b),
+          maxY: summaries.map((s) => s.maxTemperature).reduce((a, b) => a > b ? a : b),
+          lineBarsData: [
+            LineChartBarData(
+              spots: summaries.asMap().entries.map((entry) {
+                return FlSpot(entry.key.toDouble(), entry.value.avgTemperature);
+              }).toList(),
+              isCurved: true,
+              color: Colors.blue,
+              dotData: const FlDotData(show: false),
+              belowBarData: BarAreaData(show: false),
+            ),
           ],
         ),
       ),
