@@ -5,17 +5,17 @@ import '../models/daily_summary.dart';
 class WeatherChart extends StatelessWidget {
   final List<DailySummary> summaries;
 
-  WeatherChart({required this.summaries});
+  const WeatherChart({super.key, required this.summaries});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: LineChart(
         LineChartData(
-          gridData: FlGridData(show: false),
-          titlesData: FlTitlesData(show: false),
+          gridData: const FlGridData(show: false),
+          titlesData: const FlTitlesData(show: false),
           borderData: FlBorderData(show: true),
           minX: 0,
           maxX: summaries.length.toDouble() - 1,
