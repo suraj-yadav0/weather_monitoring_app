@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_monitoring_app/providers/weather_providers.dart';
-import 'package:weather_monitoring_app/widgets/daily_summary_card.dart' as daily_card;
-import 'package:weather_monitoring_app/widgets/weather_chart.dart' as weather_chart;
 
-class DashboardScreen extends StatefulWidget {
-  @override
-  _DashboardScreenState createState() => _DashboardScreenState();
-}
+import 'package:weather_monitoring_app/widgets/weather_chart.dart'
+    as weather_chart;
+import 'package:weather_monitoring_app/widgets/daily_summary_card.dart'
+    as daily_card;
 
-class _DashboardScreenState extends State<DashboardScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<WeatherProvider>(context, listen: false).fetchWeatherData();
-    });
-  }
-
+class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +17,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: Consumer<WeatherProvider>(
         builder: (context, weatherProvider, child) {
           if (weatherProvider.currentWeather.isEmpty) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           return ListView(
             children: [
               for (var weather in weatherProvider.currentWeather)
                 daily_card.DailySummaryCard(weatherData: weather),
-              weather_chart.WeatherChart(summaries: weatherProvider.dailySummaries),
+              weather_chart.WeatherChart(
+                  summaries: weatherProvider.dailySummaries),
             ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Provider.of<WeatherProvider>(context, listen: false).fetchWeatherData(),
-        child: Icon(Icons.refresh),
+        onPressed: () => Provider.of<WeatherProvider>(context, listen: false)
+            .fetchWeatherData(),
+        child: const Icon(Icons.refresh),
       ),
     );
   }
