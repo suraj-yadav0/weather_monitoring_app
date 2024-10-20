@@ -17,7 +17,7 @@ class DashboardScreen extends StatelessWidget {
      
       appBar: AppBar(
        // backgroundColor: Colors.white70,
-        title: const Text('Weather Dashboard'),centerTitle: true,actions: [
+        title: const Text('Weather Dashboard',style: TextStyle(fontWeight: FontWeight.w600,fontSize: 25),),centerTitle: true,actions: [
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
