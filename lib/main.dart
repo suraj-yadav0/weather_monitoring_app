@@ -16,13 +16,14 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => WeatherProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Weather Monitoring App',
         theme: ThemeData(
          
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home:  DashboardScreen(),
+        home: const  DashboardScreen(),
       ),
     );
   }
