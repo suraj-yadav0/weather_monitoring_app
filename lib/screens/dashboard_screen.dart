@@ -14,7 +14,9 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       appBar: AppBar(
+       // backgroundColor: Colors.white70,
         title: const Text('Weather Dashboard'),centerTitle: true,actions: [
           IconButton(
             icon: const Icon(Icons.settings),

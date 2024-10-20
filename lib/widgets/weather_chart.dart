@@ -14,8 +14,8 @@ class WeatherChart extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: LineChart(
         LineChartData(
-          gridData: const FlGridData(show: false),
-          titlesData: const FlTitlesData(show: false),
+          gridData: const FlGridData(show: true),
+          titlesData: const FlTitlesData(show: true),
           borderData: FlBorderData(show: true),
           minX: 0,
           maxX: summaries.length.toDouble() - 1,
@@ -27,7 +27,7 @@ class WeatherChart extends StatelessWidget {
                 return FlSpot(entry.key.toDouble(), entry.value.avgTemperature);
               }).toList(),
               isCurved: true,
-              color: Colors.blue,
+              color: Colors.black,
               dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(show: false),
             ),
